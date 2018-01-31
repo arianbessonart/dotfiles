@@ -44,16 +44,19 @@ else
   ## To install ZSH themes & aliases
   e_header "Copying ZSH themes & aliases..."
   e_note "Check .aliases file for more details."
-  cp oh-my-zsh/aliases ~/.aliases                                        ## Copy aliases
-  cp oh-my-zsh/zshrc ~/.zshrc                                            ## Copy zshrc configs
-  cp oh-my-zsh/z.sh ~/z.sh                                                     ## z autocompletion
+  rm ~/.aliases
+  rm ~/.zshrc
+  rm ~/z.sh
+  ln -s dotfiles/oh-my-zsh/aliases ~/.aliases
+  ln -s dotfiles/oh-my-zsh/zshrc ~/.zshrc
+  ln -s dotfiles/oh-my-zsh/z.sh ~/z.sh
 
   ## Theme
-  git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
-  ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+  git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH/themes/spaceship-prompt"
+  ln -s "$ZSH/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH/themes/spaceship.zsh-theme"
 
   ## Autosuggest
-  git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+  git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH/plugins/zsh-autosuggestions
 fi
 
 echo "🍺🍺🍺🍺  Thats all, Done."
