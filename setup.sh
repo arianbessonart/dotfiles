@@ -1,11 +1,7 @@
 #!/bin/bash
 
-
 ## Custom color codes & utility functions
 source utility.sh
-
-
-
 
 # Git configuration
 
@@ -50,9 +46,9 @@ else
   ## To install ZSH themes & aliases
   e_header "Copying ZSH themes & aliases..."
   e_note "Check .aliases file for more details."
-  rm ~/.aliases
-  rm ~/.zshrc
-  rm ~/z.sh
+  rm -f ~/.aliases
+  rm -f ~/.zshrc
+  rm -f ~/z.sh
   ln -s dotfiles/oh-my-zsh/aliases ~/.aliases
   ln -s dotfiles/oh-my-zsh/zshrc ~/.zshrc
   ln -s dotfiles/oh-my-zsh/z.sh ~/z.sh
@@ -64,5 +60,7 @@ else
   ## Autosuggest
   git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH/plugins/zsh-autosuggestions
 fi
+
+test -f ~/.z || touch .z
 
 echo "🍺🍺🍺🍺  Thats all, Done."
