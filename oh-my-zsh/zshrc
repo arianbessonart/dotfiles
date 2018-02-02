@@ -79,7 +79,7 @@ export EDITOR='vim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-. ~/z.sh
+. $HOME/z.sh
 
 ## GOLANG
 export GOPATH=$HOME/go

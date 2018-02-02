@@ -3,19 +3,21 @@
 ## Custom color codes & utility functions
 source utility.sh
 
+WORKING_DIR = $HOME
+
 # Git configuration
 
 e_header "Setup git config (global)"
 
-rm -f ~/.gitignore_global
-ln -s dotfiles/.gitignore_global ~/.gitignore
+rm -f $WORKING_DIR/.gitignore_global
+ln -s dotfiles/.gitignore_global $WORKING_DIR/.gitignore
 
-rm -f ~/.gitconfig
-ln -s dotfiles/.gitconfig ~/.gitconfig
+rm -f $WORKING_DIR/.gitconfig
+ln -s dotfiles/.gitconfig $WORKING_DIR/.gitconfig
 
 ## Install oh-my-zsh
 
-ZSH=~/.oh-my-zsh
+ZSH=$WORKING_DIR/.oh-my-zsh
 
 if [ -d "$ZSH" ]; then
   e_warning "Oh My Zsh is already installed. Skipping.."
@@ -26,12 +28,12 @@ else
   ## To install ZSH themes & aliases
   e_header "Copying ZSH themes & aliases..."
   e_note "Check .aliases file for more details."
-  rm -f ~/.aliases
-  rm -f ~/.zshrc
-  rm -f ~/z.sh
-  ln -s dotfiles/oh-my-zsh/aliases ~/.aliases
-  ln -s dotfiles/oh-my-zsh/zshrc ~/.zshrc
-  ln -s dotfiles/oh-my-zsh/z.sh ~/z.sh
+  rm -f $WORKING_DIR/.aliases
+  rm -f $WORKING_DIR/.zshrc
+  rm -f $WORKING_DIR/z.sh
+  ln -s dotfiles/oh-my-zsh/aliases $WORKING_DIR/.aliases
+  ln -s dotfiles/oh-my-zsh/zshrc $WORKING_DIR/.zshrc
+  ln -s dotfiles/oh-my-zsh/z.sh $WORKING_DIR/z.sh
 
   ## Theme
   git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH/themes/spaceship-prompt"
@@ -41,6 +43,6 @@ else
   git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH/plugins/zsh-autosuggestions
 fi
 
-test -f ~/.z || touch ~/.z
+test -f $WORKING_DIR/.z || touch $WORKING_DIR/.z
 
 echo "🍺🍺🍺🍺  Thats all, Done."
