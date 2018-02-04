@@ -3,7 +3,7 @@
 ## Custom color codes & utility functions
 source utility.sh
 
-WORKING_DIR = $HOME
+WORKING_DIR=$HOME
 
 # Git configuration
 
@@ -44,5 +44,7 @@ else
 fi
 
 test -f $WORKING_DIR/.z || touch $WORKING_DIR/.z
+
+source brew.sh
 
 echo "🍺🍺🍺🍺  Thats all, Done."
