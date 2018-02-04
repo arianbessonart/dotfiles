@@ -7,8 +7,9 @@ brew upgrade
 
 apps=(
     coreutils
-    tree
     git
+    htop
+    tree
     vim
     wget
 )
@@ -18,13 +19,14 @@ brew install "${apps[@]}"
 brew tap caskroom/cask
 
 appsCask=(
+    caffeine
     google-chrome
     iterm2
     lastpass
     spotify
     sublime-text
-    visual-studio-code
     the-unarchiver
+    visual-studio-code
 )
 
 brew cask install "${appsCask[@]}"
