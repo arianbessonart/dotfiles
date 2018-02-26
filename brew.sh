@@ -23,10 +23,12 @@ appsCask=(
     google-chrome
     iterm2
     lastpass
+    spectacle
     spotify
     sublime-text
     the-unarchiver
     visual-studio-code
+    vlc
 )
 
 brew cask install "${appsCask[@]}"
