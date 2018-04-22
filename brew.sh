@@ -22,6 +22,7 @@ appsCask=(
     caffeine
     google-chrome
     iterm2
+    itsycal
     lastpass
     spectacle
     spotify
