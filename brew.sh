@@ -19,6 +19,7 @@ brew install "${apps[@]}"
 brew tap caskroom/cask
 
 appsCask=(
+    bartender
     caffeine
     google-chrome
     iterm2
