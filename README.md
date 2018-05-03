@@ -1,11 +1,13 @@
 ## Clone Repository
 
 ```bash
-git clone git@github.com:arianbessonart/dotfiles.git ~/dotfiles
+git clone https://github.com/arianbessonart/dotfiles.git ~/dotfiles
 ```
 
 ## Install
 
 ```bash
-cd ~/dotfiles && sh setup.sh
+cd ~/dotfiles
+chmod +x setup*
+./setup
 ```

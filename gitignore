@@ -1,0 +1,16 @@
+.DS_Store
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+*.pyc
+.bundle
+.env
+.rvmrc
+.ruby-version
+.idea
+.vscode
+
+node_modules
+npm-debug.log
+yarn-error.log
