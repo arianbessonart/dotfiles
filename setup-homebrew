@@ -23,7 +23,7 @@ if ! command -v brew >/dev/null; then
 fi
 
 fancy_echo "Updating Homebrew formulae ..."
-# brew update
+brew update
 
 apps=(
     coreutils
@@ -45,8 +45,7 @@ do
   fi
 done
 
-# brew tap caskroom/cask
-
+brew tap caskroom/cask
 
 appsCask=(
   "caffeine"
@@ -69,7 +68,7 @@ echo "Install Apps: [N/y] \n${appsCaskFull[@]}"
 
 read installAppsLevel
 
-if [[ ! -z "$installAppsLevel" ]] && [installAppsLevel == "y" ]; then
+if [ ! -z "$installAppsLevel" ] && [ "$installAppsLevel" == "y" ]; then
   appsCask+=( "${appsCaskFull[@]}" )
 fi
 
