@@ -45,21 +45,33 @@ do
   fi
 done
 
-brew tap caskroom/cask
+# brew tap caskroom/cask
+
 
 appsCask=(
-    "caffeine"
-    "iterm2"
-    "itsycal"
-    "insomnia"
-    "lastpass"
-    "spectacle"
-    "spotify"
-    "sublime-text"
-    "the-unarchiver"
-    "visual-studio-code"
-    "vlc"
+  "caffeine"
+  "iterm2"
+  "the-unarchiver"
+  "visual-studio-code"
 )
+
+appsCaskFull=(
+  "itsycal"
+  "insomnia"
+  "lastpass"
+  "spectacle"
+  "spotify"
+  "sublime-text"
+  "vlc"
+)
+
+echo "Install Apps: [N/y] \n${appsCaskFull[@]}"
+
+read installAppsLevel
+
+if [[ ! -z "$installAppsLevel" ]] && [installAppsLevel == "y" ]; then
+  appsCask+=( "${appsCaskFull[@]}" )
+fi
 
 for appCask in "${appsCask[@]}"
 do
