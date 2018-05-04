@@ -1,3 +1,7 @@
+## Dotfiles
+
+Dotfiles script for personla use. Based on [Michael Jackson](https://github.com/mjackson/dotfiles) dotfiles structure.
+
 ## Clone Repository
 
 ```bash
@@ -11,3 +15,9 @@ cd ~/dotfiles
 chmod +x setup*
 ./setup
 ```
+
+## Todo
+
+* [ ] Add setup-mac
+* [ ] Support Linx
+* [ ] Improve on interactive brew installation
