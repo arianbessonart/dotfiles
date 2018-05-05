@@ -20,4 +20,4 @@ chmod +x setup*
 
 * [ ] Add setup-mac
 * [ ] Support Linx
-* [ ] Improve on interactive brew installation
+* [ ] Make more interactive brew installation apps
