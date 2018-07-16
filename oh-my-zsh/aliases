@@ -51,6 +51,9 @@ alias l='ls -lat ${colorflag}'
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
+alias restart-speakers="sudo kill -9 `ps ax|grep 'coreaudio[a-z]' | awk '{print $1}'`"
+
+
 # 5. Web Development
 
 ## Editor
