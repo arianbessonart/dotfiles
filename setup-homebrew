@@ -30,6 +30,7 @@ apps=(
     git
     go
     htop
+    "TomAnthony/brews/itermocil"
     tree
     vim
     wget
