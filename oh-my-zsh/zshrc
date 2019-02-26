@@ -100,3 +100,15 @@ export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+## Oracle
+export PATH=$PATH:~/instantclient_12_2/
+# export ORACLE_HOME=~/instantclient_12_2/
+# export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:~/instantclient_12_2/
+
+# export LD_LIBRARY_PATH=~/instantclient_12_2
+# export PKG_CONFIG_PATH=~/instantclient_12_2
+export ORACLE_SID=orcl
+
+## Rust
+export PATH="$HOME/.cargo/bin:$PATH"
