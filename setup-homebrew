@@ -60,10 +60,12 @@ appsCaskFull=(
   "postman"
   "lastpass"
   "skitch"
+  "slack"
   "spectacle"
   "spotify"
   "sublime-text"
   "vlc"
+  "whatsapp"
 )
 
 echo "Install Apps: [N/y] \n${appsCaskFull[@]}"

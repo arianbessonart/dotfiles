@@ -112,3 +112,6 @@ export ORACLE_SID=orcl
 
 ## Rust
 export PATH="$HOME/.cargo/bin:$PATH"
+
+## ruby
+eval "$(rbenv init -)"

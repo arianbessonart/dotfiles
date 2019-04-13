@@ -21,3 +21,4 @@ fi
 ./setup-bash
 ./setup-node
 ./setup-go
+./setup-ruby
