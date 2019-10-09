@@ -1,8 +1,0 @@
-#!/bin/sh
-
-# Exit immediately if a command exits with a non-zero status.
-set -e
-
-rm -rf $HOME/.itermocil
-
-ln -s dotfiles/iterm/layouts $HOME/.itermocil
