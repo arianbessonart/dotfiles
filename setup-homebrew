@@ -30,9 +30,11 @@ apps=(
     git
     go
     htop
-    "TomAnthony/brews/itermocil"
+    plantuml
+    telnet
     tree
     vim
+    watch
     wget
 )
 

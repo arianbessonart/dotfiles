@@ -7,7 +7,7 @@ export ZSH=~/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="awesomepanda"
+ZSH_THEME="spaceship"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -54,7 +54,7 @@ unsetopt share_history
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions svn ssh-agent)
+plugins=(git zsh-autosuggestions ssh-agent minikube kubectl)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -115,3 +115,24 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 ## ruby
 eval "$(rbenv init -)"
+
+## kubernetes
+KUBECONFIG="$HOME/.kube/config"
+
+for f in `ls ~/.kube/ | grep kubeconfig`
+do
+    export KUBECONFIG="$HOME/.kube/$f:$KUBECONFIG";
+done
+
+export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Spaceship Zsh-theme
+SPACESHIP_KUBECONTEXT_SHOW=false

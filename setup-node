@@ -5,6 +5,9 @@ set -e
 brew install node
 brew install yarn
 
+npm install -g nvm
+npm install -g pnpm
+
 yarn global add create-react-app
 yarn global add prettier
 yarn global add serve

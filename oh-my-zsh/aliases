@@ -1,5 +1,3 @@
-# Author: https://github.com/gokulkrishh
-
 # 1. GIT
 
 ## Status
@@ -54,16 +52,14 @@ alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && kil
 ## Restart Speakers, kill coreaudio process, and automatically start after a couple of seconds
 alias restart-speakers="sudo kill -9 `ps ax|grep 'coreaudio[a-z]' | awk '{print $1}'`"
 
-
-# 5. Web Development
-
-## Editor
-alias st="open -a 'Sublime Text'"
-
 ## Chrome aliases
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
 ## To update brew, npm, gem and their installed packages
 alias update='brew update; brew upgrade; brew cleanup; npm update npm -g; npm update -g'
+
+
+## Kubernetes
+alias k=kubectl
 
 ## END

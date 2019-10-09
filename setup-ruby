@@ -3,5 +3,5 @@
 set -e
 
 brew install rbenv
-# brew install rvm
+
 gem install rails

@@ -25,5 +25,12 @@ else
 
   ## Autosuggest
   git clone https://github.com/zsh-users/zsh-autosuggestions $OH_MY_ZSH/plugins/zsh-autosuggestions
+  ## Autosuggest
+
+  ## Theme
+  git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
+  ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+  ## Theme
+
 fi
 test -f $HOME/.z || touch $HOME/.z
