@@ -26,16 +26,18 @@ fancy_echo "Updating Homebrew formulae ..."
 brew update
 
 apps=(
-    coreutils
-    git
-    go
-    htop
-    plantuml
-    telnet
-    tree
-    vim
-    watch
-    wget
+  coreutils
+  docker
+  docker-machine
+  git
+  go
+  htop
+  plantuml
+  telnet
+  tree
+  vim
+  watch
+  wget
 )
 
 for app in "${apps[@]}"
@@ -55,28 +57,19 @@ appsCask=(
   "iterm2"
   "the-unarchiver"
   "visual-studio-code"
-)
-
-appsCaskFull=(
+  "google-chrome"
   "itsycal"
   "postman"
+  "postgresql"
   "lastpass"
   "skitch"
   "slack"
-  "spectacle"
+  "rectangle"
   "spotify"
-  "sublime-text"
   "vlc"
+  "virtualbox"
   "whatsapp"
 )
-
-echo "Install Apps: [N/y] \n${appsCaskFull[@]}"
-
-read installAppsLevel
-
-if [ ! -z "$installAppsLevel" ] && [ "$installAppsLevel" == "y" ]; then
-  appsCask+=( "${appsCaskFull[@]}" )
-fi
 
 for appCask in "${appsCask[@]}"
 do

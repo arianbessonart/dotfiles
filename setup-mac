@@ -58,3 +58,6 @@ defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 for app in "Dock" "Finder"; do
   killall "${app}" > /dev/null 2>&1
 done
+
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+defaults write com.microsoft.VSCodeInsiders ApplePressAndHoldEnabled -bool false

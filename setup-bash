@@ -33,4 +33,5 @@ else
   ## Theme
 
 fi
+## create .z file for z plugin
 test -f $HOME/.z || touch $HOME/.z
