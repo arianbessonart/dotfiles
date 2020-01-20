@@ -50,8 +50,6 @@ do
   fi
 done
 
-brew tap caskroom/cask
-
 appsCask=(
   "caffeine"
   "iterm2"

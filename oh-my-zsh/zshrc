@@ -114,9 +114,11 @@ export ORACLE_SID=orcl
 export PATH="$HOME/.cargo/bin:$PATH"
 
 ## ruby
+# echo `export PATH=”$HOME/.rbenv/bin:$PATH”` >> ~/.zshrc
 eval "$(rbenv init -)"
 
 ## kubernetes
+mkdir -p "$HOME/.kube"
 KUBECONFIG="$HOME/.kube/config"
 
 for f in `ls ~/.kube/ | grep kubeconfig`
