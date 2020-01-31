@@ -47,7 +47,7 @@ set showmatch
 "NERDTREE
 map <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
-let NERDTreeIgnore=['\.vim$', '\~$', '\.git$', '.DS_Store']
+let NERDTreeIgnore=['\~$', '\.git$', '.DS_Store']
 let NERDTreeDirArrows = 1
 let NERDTreeMinimalUI = 1
 

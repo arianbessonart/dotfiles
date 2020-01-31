@@ -19,9 +19,9 @@ else
   rm -f $HOME/.aliases
   rm -f $HOME/.zshrc
   rm -f $HOME/z.sh
-  ln -s dotfiles/oh-my-zsh/aliases $HOME/.aliases
-  ln -s dotfiles/oh-my-zsh/zshrc $HOME/.zshrc
-  ln -s dotfiles/oh-my-zsh/z.sh $HOME/z.sh
+  ln -s $HOME/dotfiles/oh-my-zsh/aliases $HOME/.aliases
+  ln -s $HOME/dotfiles/oh-my-zsh/zshrc $HOME/.zshrc
+  ln -s $HOME/dotfiles/oh-my-zsh/z.sh $HOME/z.sh
 
   ## Autosuggest
   git clone https://github.com/zsh-users/zsh-autosuggestions $OH_MY_ZSH/plugins/zsh-autosuggestions
