@@ -21,3 +21,4 @@ fi
 ./setup-node
 ./setup-go
 ./setup-ruby
+./setup-vim

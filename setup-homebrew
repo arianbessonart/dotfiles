@@ -29,13 +29,15 @@ apps=(
   coreutils
   docker
   docker-machine
+  fzf
+  neovim
+  rg
   git
   go
   htop
   plantuml
   telnet
   tree
-  vim
   watch
   wget
 )
@@ -54,6 +56,7 @@ appsCask=(
   "caffeine"
   "iterm2"
   "the-unarchiver"
+  "the_silver_searcher"
   "visual-studio-code"
   "google-chrome"
   "itsycal"
