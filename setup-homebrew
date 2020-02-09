@@ -38,6 +38,7 @@ apps=(
   plantuml
   telnet
   tree
+  "--HEAD universal-ctags/universal-ctags/universal-ctags"
   watch
   wget
 )
