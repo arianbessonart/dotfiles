@@ -30,7 +30,7 @@ if [ $platform == "macos" ]; then
   # ./setup-mac
 fi
 
-./git/setup.sh
+# ./git/setup.sh
 ./shell/setup.sh
 # ./setup-node
 # ./setup-go
