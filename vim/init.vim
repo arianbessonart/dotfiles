@@ -26,6 +26,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'rust-lang/rust.vim',        { 'for': 'rust' }
+Plug 'crusoexia/vim-monokai'
+Plug 'Yggdroot/indentLine'
 call plug#end()
 
 
@@ -33,6 +35,7 @@ filetype plugin indent on
 
 " GENERAL
 syntax enable
+colorscheme monokai
 set noswapfile
 set nobackup
 set shortmess+=c
@@ -156,6 +159,7 @@ let g:ale_linters = {
       \ 'javascript': ['eslint'],
       \ 'typescript': ['tslint'],
       \ 'go': ['vet', 'errcheck', 'lint'],
+      \ 'ruby': ['rubocop'],
       \}
 """"""""
 
@@ -182,6 +186,7 @@ let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
+let g:go_gopls_enabled = 0
 
 let g:go_auto_sameids = 1
 let g:go_fmt_command = "goimports"
