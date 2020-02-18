@@ -6,3 +6,7 @@ git:
 
 script:
   - ./setup.sh
+
+  branches:
+  only:
+  - develop
