@@ -5,13 +5,10 @@ set -e
 
 source utility
 
+
 apps=(
-  coreutils
   docker
   docker-machine
-  fzf
-  neovim
-  rg
   git
   htop
   plantuml

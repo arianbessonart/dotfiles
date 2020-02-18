@@ -5,7 +5,6 @@ set -e
 source utility
 
 # Install Git
-
 brew install git
 
 # Clean
@@ -37,15 +36,15 @@ git config --global credential.helper osxkeychain
 # default push to current branch
 git config --global push.default current
 
-read -p "Email: " email
-[ -z "${email}" ] && email='arianbessonart@gmail.com'
+# read -p "Email: " email
+# [ -z "${email}" ] && email='arianbessonart@gmail.com'
 
-read -p "Name: " name
-[ -z "${name}" ] && name='Arian Bessonart'
+# read -p "Name: " name
+# [ -z "${name}" ] && name='Arian Bessonart'
 
-read -p "Username: " username
-[ -z "${username}" ] && name='arianbessonart'
+# read -p "Username: " username
+# [ -z "${username}" ] && name='arianbessonart'
 
-git config --global user.email $email
-git config --global user.name $name
-git config --global user.username $username
+# git config --global user.email $email
+# git config --global user.name $name
+# git config --global user.username $username

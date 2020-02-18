@@ -1,7 +1,6 @@
 #!/bin/sh
 
 set -e
-
 source utility
 
 homebrew_prefix="/usr/local"
@@ -24,3 +23,20 @@ fi
 
 fancy_echo "Updating Homebrew formulae ..."
 brew update
+
+apps=(
+  coreutils
+  fzf
+  neovim
+  rg
+)
+
+for app in "${apps[@]}"
+do
+  if brew ls --versions "$app" > /dev/null; then
+    fancy_echo "$app installed"
+  else
+    echo "$app is not installed"
+    brew install "$app"
+  fi
+done

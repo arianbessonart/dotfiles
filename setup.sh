@@ -5,6 +5,7 @@ set -e
 
 interactive=0
 
+# read flags
 while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
   -V | --version )
     echo $version
@@ -29,7 +30,7 @@ if [ $platform == "macos" ]; then
   # ./setup-mac
 fi
 
-# ./setup-git
+./git/setup.sh
 # ./setup-bash
 # ./setup-node
 # ./setup-go
