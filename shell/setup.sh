@@ -8,6 +8,9 @@ source utility
 ## Install oh-my-zsh
 OH_MY_ZSH=$HOME/.oh-my-zsh
 
+## Install oh-my-zsh
+OH_MY_ZSH=$HOME/.oh-my-zsh
+
 if [ -d "$OH_MY_ZSH" ]; then
   fancy_echo "Oh My Zsh is already installed. Skipping.."
 else

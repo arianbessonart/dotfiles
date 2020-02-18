@@ -31,7 +31,7 @@ if [ $platform == "macos" ]; then
 fi
 
 ./git/setup.sh
-# ./setup-bash
+./shell/setup.sh
 # ./setup-node
 # ./setup-go
 # ./setup-ruby
