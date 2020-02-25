@@ -28,6 +28,7 @@ apps=(
   coreutils
   fzf
   neovim
+  vim
   rg
 )
 
