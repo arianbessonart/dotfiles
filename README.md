@@ -1,6 +1,6 @@
 ## Dotfiles
 
-Dotfiles script for personal use. Based on [Michael Jackson](https://github.com/mjackson/dotfiles) dotfiles structure.
+Dotfiles script for personal use.
 
 ## Clone Repository
 
