@@ -26,6 +26,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'rust-lang/rust.vim',        { 'for': 'rust' }
+Plug 'crusoexia/vim-monokai'
+Plug 'Yggdroot/indentLine'
 call plug#end()
 
 
@@ -33,11 +35,13 @@ filetype plugin indent on
 
 " GENERAL
 syntax enable
+colorscheme monokai
 set noswapfile
 set nobackup
 set shortmess+=c
 set number
 set history=100
+set colorcolumn=100
 set encoding=UTF-8
 set clipboard^=unnamed
 set backspace=indent,eol,start
@@ -72,6 +76,8 @@ nmap <leader>ww <c-w><c-w>
 nnoremap <esc> :noh<return><esc>
 inoremap <C-c> <ESC>
 nnoremap <silent> <leader>b :ToggleBlameLine<CR>
+nnoremap <leader>s :update<cr>
+inoremap <leader>s <Esc>:update<cr>gi
 "map <C-h> <C-w>h
 "map <C-j> <C-w>j
 "map <C-k> <C-w>k
@@ -156,6 +162,7 @@ let g:ale_linters = {
       \ 'javascript': ['eslint'],
       \ 'typescript': ['tslint'],
       \ 'go': ['vet', 'errcheck', 'lint'],
+      \ 'ruby': ['rubocop'],
       \}
 """"""""
 
@@ -176,15 +183,33 @@ set noshowmode
 "{{{ GO
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
+let g:go_highlight_generate_tags = 1
 let g:go_highlight_fields = 1
+let g:go_highlight_function_calls = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 
+let g:go_metalinter_enabled = 0
+let g:go_metalinter_autosave = 0
+let g:go_metalinter_autosave_enabled = ['golint']
+let g:go_metalinter_deadline = "5s"
+
+let g:go_gopls_enabled = 0
 let g:go_auto_sameids = 1
 let g:go_fmt_command = "goimports"
+
+let g:go_list_type = "quickfix"
+let g:go_def_reuse_buffer = 1
+let g:go_doc_keywordprg_enabled = 0
+let g:go_def_mapping_enabled = 0 " leave this to the language server
+let g:go_term_enabled = 0
+let g:go_code_completion_enabled = 0
+let g:go_test_show_name = 1
+let g:go_auto_type_info = 0
+
 "}}}
 
 "{{{ FUGITIVE

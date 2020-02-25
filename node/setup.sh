@@ -2,9 +2,6 @@
 
 set -e
 
-brew install node
-brew install yarn
-
 npm install -g nvm
 
 yarn global add create-react-app
