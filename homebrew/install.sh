@@ -29,6 +29,11 @@ apps=(
   fzf
   neovim
   rg
+  git
+  go
+  node
+  yarn
+  rbenv
 )
 
 for app in "${apps[@]}"

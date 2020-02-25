@@ -2,6 +2,4 @@
 
 set -e
 
-brew install rbenv
-
 gem install rails

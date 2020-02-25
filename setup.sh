@@ -25,8 +25,8 @@ if [ $platform == "macos" ]; then
 fi
 
 homebrew/install.sh
-shell/setup.sh
 git/setup.sh
+shell/setup.sh
 node/setup.sh
 rust/setup.sh
 vim/setup.sh

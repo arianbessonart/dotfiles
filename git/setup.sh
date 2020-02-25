@@ -4,9 +4,6 @@ set -e
 
 source utility
 
-# Install Git
-brew install git
-
 # Clean
 rm -f $HOME/.gitignore
 
