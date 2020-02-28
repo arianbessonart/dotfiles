@@ -73,7 +73,6 @@ nmap <ctrl+[> <Esc>
 nmap <space><space> :e#<CR>
 nnoremap <silent> <leader>e $<CR>
 nmap <leader>ww <c-w><c-w>
-nnoremap <esc> :noh<return><esc>
 inoremap <C-c> <ESC>
 nnoremap <silent> <leader>b :ToggleBlameLine<CR>
 nnoremap <leader>s :update<cr>
@@ -222,9 +221,9 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 nmap <leader><tab> <plug>(fzf-maps-n)
 
+let $FZF_DEFAULT_COMMAND = 'rg --files --follow -g "!{.git,node_modules}/*" 2>/dev/null'
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".<q-args>, <bang>0)
-command! -bang -nargs=? -complete=dir Files
- \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
 """"""""
@@ -278,7 +277,7 @@ endfunction
 
 " Files + devicons + floating fzf
 function! Fzf_dev()
-  let l:fzf_files_options = '--preview "bat --line-range :'.&lines.' --theme="OneHalfDark" --style=numbers,changes --color always {2..-1}"'
+  let l:fzf_files_options = '--preview "bat --line-range :'.&lines.' --theme="OneHalfDark" --style=numbers,changes --color always {2..-1}" --exclude "!{node_modules/*,.git/*}"'
   function! s:files()
     let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
     return s:prepend_icon(l:files)
