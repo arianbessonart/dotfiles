@@ -1,51 +1,68 @@
 set nocompatible
+
 filetype off
 
 "Plugins
 call plug#begin()
 Plug 'itchyny/lightline.vim'
+Plug 'itchyny/vim-gitbranch'
 Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
-Plug 'Raimondi/delimitMate'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rails',           { 'for': 'ruby' }
-Plug 'fatih/vim-go',              { 'do': ':GoUpdateBinaries', 'for': 'go' }
 Plug 'ryanoasis/vim-devicons'
-Plug 'majutsushi/tagbar'
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2'
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-path'
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
-Plug 'dense-analysis/ale'
-Plug 'tveskag/nvim-blame-line'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-surround'
-Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'pangloss/vim-javascript',   { 'for': 'javascript' }
 Plug 'rust-lang/rust.vim',        { 'for': 'rust' }
-Plug 'crusoexia/vim-monokai'
-Plug 'Yggdroot/indentLine'
-call plug#end()
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'jparise/vim-graphql'
+Plug 'majutsushi/tagbar'
+Plug 'airblade/vim-gitgutter'
+Plug 'wakatime/vim-wakatime'
+"------------------------ VIM TSX ------------------------
+" by default, if you open tsx file, neovim does not show syntax colors
+" vim-tsx will do all the coloring for jsx in the .tsx file
+Plug 'ianks/vim-tsx'
+"------------------------ VIM TSX ------------------------
+" by default, if you open tsx file, neovim does not show syntax colors
+" typescript-vim will do all the coloring for typescript keywords
+Plug 'leafgarland/typescript-vim'
+"------------------------ One Dark Theme ------------------------
+Plug 'joshdick/onedark.vim'
 
+Plug 'tpope/vim-commentary'
+Plug 'jiangmiao/auto-pairs'
+Plug 'zivyangll/git-blame.vim'
+call plug#end()
 
 filetype plugin indent on
 
+autocmd FileType json let g:indentLine_enabled=0
+autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
+
+" == AUTOCMD ================================
+" by default .ts file are not identified as typescript and .tsx files are not
+" identified as typescript react file, so add following
+au BufNewFile,BufRead *.ts setlocal filetype=typescript
+au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
+
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+" == AUTOCMD END ================================
+
+
+
 " GENERAL
 syntax enable
-colorscheme monokai
 set noswapfile
 set nobackup
 set shortmess+=c
 set number
 set history=100
-set colorcolumn=100
+set colorcolumn=120
 set encoding=UTF-8
 set clipboard^=unnamed
 set backspace=indent,eol,start
-setlocal foldmethod=indent
+"setlocal foldmethod=indent
 set scrolloff=5
 set guifont=monospace
 set nobk
@@ -54,13 +71,17 @@ set lazyredraw
 set termguicolors
 set background=dark
 set t_Co=256
-set tabstop=2
-set shiftwidth=2
-set cursorline
+set tabstop=2 shiftwidth=2 expandtab
 set hlsearch
 set showmatch
 set hidden
+
+syntax on
+
+colorscheme onedark
 """"""""
+
+highlight ColorColumn guibg=#6e6f6f
 
 "MAPPINGS
 let mapleader=","
@@ -74,25 +95,99 @@ nmap <space><space> :e#<CR>
 nnoremap <silent> <leader>e $<CR>
 nmap <leader>ww <c-w><c-w>
 inoremap <C-c> <ESC>
-nnoremap <silent> <leader>b :ToggleBlameLine<CR>
+" nnoremap <silent> <leader>b :ToggleBlameLine<CR>
+nnoremap <silent> <leader>b :<C-u>call gitblame#echo()<CR>
 nnoremap <leader>s :update<cr>
 inoremap <leader>s <Esc>:update<cr>gi
-"map <C-h> <C-w>h
-"map <C-j> <C-w>j
-"map <C-k> <C-w>k
-"map <C-l> <C-w>l
-"nmap <c-l> :ls<CR>
-""""""""
 
-" {{{ NCM2
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
-" }}}
+""" Coc  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gr <Plug>(coc-references)
+
+" use <c-space>for trigger completion
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+
+
+" Use K to show documentation in preview window.
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> <c-k> :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+
+" coc extensions
+let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-rust-analyzer']
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""" Rust
+let g:rustfmt_autosave = 1
+
+""" Lightline
+set noshowmode 
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'gitbranch#name'
+      \ },
+      \ }
+"""
+
 
 "{{{ TAGBAR
 let g:tagbar_foldlevel = 0
 nmap ,. :TagbarToggle<CR><C-w><C-w>
+
+let g:tagbar_type_typescript = {
+  \ 'ctagstype': 'typescript',
+  \ 'kinds': [
+    \ 'c:classes',
+    \ 'n:modules',
+    \ 'f:functions',
+    \ 'v:variables',
+    \ 'v:varlambdas',
+    \ 'm:members',
+    \ 'i:interfaces',
+    \ 'e:enums',
+  \ ]
+\ }
+
 "}}}
+
+" cursorline
+set cursorline
+hi cursorline cterm=none term=none
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
+highlight CursorLine guibg=#404040 ctermbg=234
+
+""""
 
 "NERDTREE
 map <C-n> :call MyNerdToggle()<CR>
@@ -128,128 +223,18 @@ function MyNerdToggle()
 endfunction
 """"""""
 
-" Ale
-highlight ALEErrorSign ctermfg=9 ctermbg=15 guifg=#C30500
-highlight ALEWarningSign ctermfg=11 ctermbg=15 guifg=#FFA500
-
-
-" ALE
-let g:ale_fixers = {
-            \'*': ['remove_trailing_lines', 'trim_whitespace'],
-            \'javascript': ['prettier'],
-            \'css' : ['prettier'],
-            \'html' : ['prettier'],
-            \'markdown' : ['prettier'],
-            \ 'go': ['goimports'],
-            \ 'rust': ['rustfmt'],
-            \'yaml': ['prettier'],
-            \'json': ['prettier'],
-            \}
-let g:ale_fix_on_save = 1
-let g:ale_linters_explicit = 1
-let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_sign_warning = '⚠'
-let g:ale_sign_error = '✘'
-let g:ale_sign_info = ''
-let g:ale_completion_enabled = 1
-let g:ale_rust_cargo_use_clippy = 1
-let g:ale_go_gometalinter_options = '--fast'
-let g:ale_lint_on_enter = 1
-autocmd BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
-let g:ale_linters = {
-      \ 'javascript': ['eslint'],
-      \ 'typescript': ['tslint'],
-      \ 'go': ['vet', 'errcheck', 'lint'],
-      \ 'ruby': ['rubocop'],
-      \}
-""""""""
-
-"LIGHTLINE
-let g:lightline = {
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head',
-      \ },
-      \ }
-set laststatus=2
-set noshowmode
-""""""""
-
-"{{{ GO
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_generate_tags = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_types = 1
-
-let g:go_metalinter_enabled = 0
-let g:go_metalinter_autosave = 0
-let g:go_metalinter_autosave_enabled = ['golint']
-let g:go_metalinter_deadline = "5s"
-
-let g:go_gopls_enabled = 0
-let g:go_auto_sameids = 1
-let g:go_fmt_command = "goimports"
-
-let g:go_list_type = "quickfix"
-let g:go_def_reuse_buffer = 1
-let g:go_doc_keywordprg_enabled = 0
-let g:go_def_mapping_enabled = 0 " leave this to the language server
-let g:go_term_enabled = 0
-let g:go_code_completion_enabled = 0
-let g:go_test_show_name = 1
-let g:go_auto_type_info = 0
-
-"}}}
-
-"{{{ FUGITIVE
-"set diffopt+=vertical
-"}}}
-
 "FZF
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 nmap <leader><tab> <plug>(fzf-maps-n)
 
-let $FZF_DEFAULT_COMMAND = 'rg --files --follow -g "!{.git,node_modules}/*" 2>/dev/null'
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow -g "!{.git,node_modules}/*" 2>/dev/null'
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".<q-args>, <bang>0)
 command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
 """"""""
-
-
-" {{{ LanguageClient
-" let g:LanguageClient_loggingFile = '~/Desktop/lcn.log'
-" let g:LanguageClient_loggingLevel = 'INFO'
-let g:LanguageClient_diagnosticsList = 'Disabled'
-let g:LanguageClient_hoverPreview = 'always'
-let g:LanguageClient_completionPreferTextEdit = 0
-let g:LanguageClient_serverCommands = {
-    \ 'go': ['gopls'],
-    \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
-    \ 'rust': ['ra_lsp_server'],
-    \ }
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> R :call LanguageClient#textDocument_rename()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
-nnoremap <silent> gi :call LanguageClient#textDocument_implementation()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-noremap <leader>ca :call LanguageClient#textDocument_codeAction()<CR>
-command Action :call LanguageClient#textDocument_codeAction()<CR>
-" }}}
 
 " floating fzf window with borders
 function! CreateCenteredFloatingWindow()
@@ -310,6 +295,7 @@ function! Fzf_dev()
 endfunction
 
 " Relative numbers
+set relativenumber
 nnoremap <leader>nt :call NumberToggle()<cr>
 function! NumberToggle()
   if(&relativenumber == 1)
