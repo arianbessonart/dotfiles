@@ -139,6 +139,10 @@ export NVM_DIR="$HOME/.nvm"
 
 # Spaceship Zsh-theme
 SPACESHIP_KUBECONTEXT_SHOW=false
+SPACESHIP_PACKAGE_SHOW=false
+SPACESHIP_DOCKER_SHOW=false
+SPACESHIP_GIT_STATUS_SHOW=false
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

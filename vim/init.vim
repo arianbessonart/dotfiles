@@ -18,6 +18,8 @@ Plug 'jparise/vim-graphql'
 Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'wakatime/vim-wakatime'
+Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-fugitive'
 "------------------------ VIM TSX ------------------------
 " by default, if you open tsx file, neovim does not show syntax colors
 " vim-tsx will do all the coloring for jsx in the .tsx file
@@ -30,8 +32,10 @@ Plug 'leafgarland/typescript-vim'
 Plug 'joshdick/onedark.vim'
 
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'zivyangll/git-blame.vim'
+Plug 'fatih/vim-go'
 call plug#end()
 
 filetype plugin indent on
@@ -49,8 +53,6 @@ autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
 autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 " == AUTOCMD END ================================
 
-
-
 " GENERAL
 syntax enable
 set noswapfile
@@ -62,8 +64,9 @@ set colorcolumn=120
 set encoding=UTF-8
 set clipboard^=unnamed
 set backspace=indent,eol,start
-"setlocal foldmethod=indent
-set scrolloff=5
+" set foldmethod=syntax
+" set foldlevelstart=99
+set scrolloff=8
 set guifont=monospace
 set nobk
 set autoindent
@@ -95,10 +98,14 @@ nmap <space><space> :e#<CR>
 nnoremap <silent> <leader>e $<CR>
 nmap <leader>ww <c-w><c-w>
 inoremap <C-c> <ESC>
-" nnoremap <silent> <leader>b :ToggleBlameLine<CR>
 nnoremap <silent> <leader>b :<C-u>call gitblame#echo()<CR>
 nnoremap <leader>s :update<cr>
 inoremap <leader>s <Esc>:update<cr>gi
+
+" Tabs
+"
+nnoremap tn :tabnext<CR>
+nnoremap tp :tabprev<CR>
 
 """ Coc  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <silent> gd <Plug>(coc-definition)
@@ -135,17 +142,19 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-
 " coc extensions
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-rust-analyzer']
-
+let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier']
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """ Rust
 let g:rustfmt_autosave = 1
 
+""" Golang
+let g:go_def_mapping_enabled = 0
+let g:go_fmt_command = "goimports"
+
 """ Lightline
-set noshowmode 
+set noshowmode
 
 let g:lightline = {
       \ 'colorscheme': 'wombat',
@@ -189,6 +198,7 @@ highlight CursorLine guibg=#404040 ctermbg=234
 
 """"
 
+
 "NERDTREE
 map <C-n> :call MyNerdToggle()<CR>
 " Start NERDTree automatically when vim starts up if no files were specified.
@@ -207,7 +217,6 @@ let NERDTreeMinimalUI = 1
 let NERDTreeAutoDeleteBuffer = 1
 " Re Map keys
 let NERDTreeMapPreview='p'
-"let NERDTreeMapActivateNode='o'
 
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
@@ -304,3 +313,29 @@ function! NumberToggle()
     set relativenumber
   endif
 endfunc
+
+
+
+" Highlight all instances of word under cursor, when idle.
+" Useful when studying strange source code.
+" Type z/ to toggle highlighting on/off.
+nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
+function! AutoHighlightToggle()
+    let @/ = ''
+    if exists('#auto_highlight')
+        au! auto_highlight
+        augroup! auto_highlight
+        setl updatetime=4000
+        echo 'Highlight current word: off'
+        return 0
+    else
+        augroup auto_highlight
+            au!
+            au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+        augroup end
+        setl updatetime=500
+        echo 'Highlight current word: ON'
+        return 1
+    endif
+endfunction
+

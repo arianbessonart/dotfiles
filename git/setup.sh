@@ -13,6 +13,7 @@ git config --global alias.br branch
 git config --global alias.ci commit
 git config --global alias.cim "commit -m"
 git config --global alias.co checkout
+git config --global alias.sw switch
 git config --global alias.gc "git checkout"
 git config --global alias.gp "git push"
 git config --global alias.gl "git pull"
@@ -24,7 +25,7 @@ git config --global alias.st status
 git config --global color.ui true
 
 git config --global core.autocrlf input
-git config --global core.editor vim
+git config --global core.editor nvim
 git config --global core.eol lf
 git config --global core.excludesfile "$HOME/.gitignore"
 

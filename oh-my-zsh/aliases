@@ -43,7 +43,10 @@ alias zip="zip -x *.DS_Store -x *__MACOSX* -x *.AppleDouble*"
 alias kt="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
 
 ## List all files colorized in long format
-alias l='ls -lat ${colorflag}'
+#
+alias ls="exa"
+alias l="exa -l --git"
+# alias l='ls -lat ${colorflag}'
 
 ## Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
