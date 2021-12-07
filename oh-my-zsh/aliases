@@ -68,4 +68,7 @@ alias k=kubectl
 ## nvim
 alias n=nvim
 
+## terraform
+alias tf=terraform
+
 ## END

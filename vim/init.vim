@@ -2,6 +2,9 @@ set nocompatible
 
 filetype off
 
+
+let g:plug_url_format = 'git@github.com:%s.git'
+
 "Plugins
 call plug#begin()
 Plug 'itchyny/lightline.vim'
@@ -20,10 +23,13 @@ Plug 'airblade/vim-gitgutter'
 Plug 'wakatime/vim-wakatime'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-fugitive'
+Plug 'lukas-reineke/indent-blankline.nvim'
 "------------------------ VIM TSX ------------------------
 " by default, if you open tsx file, neovim does not show syntax colors
 " vim-tsx will do all the coloring for jsx in the .tsx file
 Plug 'ianks/vim-tsx'
+Plug 'github/copilot.vim'
+
 "------------------------ VIM TSX ------------------------
 " by default, if you open tsx file, neovim does not show syntax colors
 " typescript-vim will do all the coloring for typescript keywords
@@ -31,12 +37,17 @@ Plug 'leafgarland/typescript-vim'
 "------------------------ One Dark Theme ------------------------
 Plug 'joshdick/onedark.vim'
 
+Plug 'udalov/kotlin-vim'
+
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'zivyangll/git-blame.vim'
 Plug 'fatih/vim-go'
+Plug 'hashivim/vim-terraform'
 call plug#end()
+
+unlet g:plug_url_format
 
 filetype plugin indent on
 
@@ -64,8 +75,12 @@ set colorcolumn=120
 set encoding=UTF-8
 set clipboard^=unnamed
 set backspace=indent,eol,start
-" set foldmethod=syntax
+set foldmethod=syntax
 " set foldlevelstart=99
+set foldlevel=4
+" set foldmethod=indent
+set nofoldenable
+
 set scrolloff=8
 set guifont=monospace
 set nobk
@@ -144,6 +159,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " coc extensions
 let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier']
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """ Rust

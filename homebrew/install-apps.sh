@@ -7,14 +7,15 @@ source utility
 
 
 apps=(
+  "--HEAD universal-ctags/universal-ctags/universal-ctags"
   docker
   docker-machine
   git
   htop
+  jq
   plantuml
   telnet
   tree
-  "--HEAD universal-ctags/universal-ctags/universal-ctags"
   watch
   wget
 )

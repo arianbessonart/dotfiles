@@ -15,9 +15,3 @@ cd ~/dotfiles
 chmod +x setup*
 ./setup
 ```
-
-## Todo
-
-* [ ] Add setup-mac
-* [ ] Support Linx
-* [ ] Make more interactive brew installation apps
