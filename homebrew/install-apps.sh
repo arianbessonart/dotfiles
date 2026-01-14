@@ -44,6 +44,7 @@ appsCask=(
   "notion-calendar"
   "postman"
   "slack"
+  "raycast"
   "rectangle"
   "spotify"
   "vlc"
