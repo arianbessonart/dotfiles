@@ -3,22 +3,24 @@
 set -e
 source utility
 
-homebrew_prefix="/usr/local"
-
-if [ -d "$homebrew_prefix" ]; then
-  if ! [ -r "$homebrew_prefix" ]; then
-    sudo chown -R "$LOGNAME:admin" /usr/local
-  fi
+# Detect architecture and set homebrew prefix
+if [[ $(uname -m) == 'arm64' ]]; then
+  homebrew_prefix="/opt/homebrew"
 else
-  sudo mkdir "$homebrew_prefix"
-  sudo chflags norestricted "$homebrew_prefix"
-  sudo chown -R "$LOGNAME:admin" "$homebrew_prefix"
+  homebrew_prefix="/usr/local"
 fi
 
 if ! command -v brew >/dev/null; then
   fancy_echo "Installing Homebrew ..."
-  curl -fsS \
-    'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  # Add Homebrew to PATH for Apple Silicon
+  if [[ $(uname -m) == 'arm64' ]]; then
+    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/.zprofile
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  fi
+else
+  fancy_echo "Homebrew is already installed."
 fi
 
 fancy_echo "Updating Homebrew formulae ..."
