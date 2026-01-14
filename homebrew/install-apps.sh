@@ -32,11 +32,10 @@ done
 
 appsCask=(
   "ghostty"
-  "brave"
+  "brave-browser"
   "cursor"
   "chatgpt"
-  "docker-desktop"
-  "claude-code"
+  "docker"
   "google-cloud-sdk"
   "itsycal"
   "meetingbar"
@@ -44,8 +43,8 @@ appsCask=(
   "notion"
   "notion-calendar"
   "postman"
-  "stremio"
   "slack"
+  "raycast"
   "rectangle"
   "spotify"
   "vlc"
@@ -54,10 +53,10 @@ appsCask=(
 
 for appCask in "${appsCask[@]}"
 do
-  if ! brew info --cask "$appCask" > /dev/null; then
-    fancy_echo "$appCask installed"
+  if brew list --cask "$appCask" &>/dev/null; then
+    fancy_echo "$appCask already installed"
   else
-    echo "$appCask is not installed"
+    echo "Installing $appCask..."
     brew install --cask "$appCask"
   fi
 done
