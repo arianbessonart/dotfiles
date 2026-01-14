@@ -28,10 +28,10 @@ brew update
 
 apps=(
   coreutils
-  exa
+  eza
   fzf
   neovim
-  rg
+  ripgrep
   git
   go
   node
