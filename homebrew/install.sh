@@ -34,8 +34,6 @@ apps=(
   ripgrep
   git
   go
-  node
-  yarn
 )
 
 for app in "${apps[@]}"
