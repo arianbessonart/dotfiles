@@ -65,7 +65,6 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-export EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -86,36 +85,19 @@ export EDITOR='vim'
 
 . $HOME/z.sh
 
+export EDITOR=nvim
+
 ## GOLANG
 export GOPATH=$HOME/go
-export GOROOT=/usr/local/opt/go/libexec
+export GOROOT=/opt/homebrew/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 
 ## PYTHON
 export PATH=$PATH:$HOME/Library/Python/2.7/bin
 
-## Android
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-## Oracle
-export PATH=$PATH:~/instantclient_12_2/
-# export ORACLE_HOME=~/instantclient_12_2/
-# export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:~/instantclient_12_2/
-
-# export LD_LIBRARY_PATH=~/instantclient_12_2
-# export PKG_CONFIG_PATH=~/instantclient_12_2
-export ORACLE_SID=orcl
-
 ## Rust
 export PATH="$HOME/.cargo/bin:$PATH"
-
-## ruby
-# echo `export PATH=”$HOME/.rbenv/bin:$PATH”` >> ~/.zshrc
-# eval "$(rbenv init -)"
 
 ## kubernetes
 mkdir -p "$HOME/.kube"
@@ -126,16 +108,33 @@ do
     export KUBECONFIG="$HOME/.kube/$f:$KUBECONFIG";
 done
 
-export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+##### NVM AUTO USE #####
+
+export NVM_DIR="${XDG_CONFIG_HOME:-$HOME/.nvm}"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+autoload -U add-zsh-hook
+
+nvm_auto_use() {
+  if [ -f .nvmrc ]; then
+    local nvmrc_node_version=$(<.nvmrc)
+    if [ "$(nvm version)" != "v$nvmrc_node_version" ]; then
+      nvm use &>/dev/null || {
+        echo "Installing Node.js version from .nvmrc: $nvmrc_node_version"
+        nvm install "$nvmrc_node_version"
+      }
+    fi
+  fi
+}
+
+add-zsh-hook chpwd nvm_auto_use
+nvm_auto_use
+
+##### NVM AUTO USE #####
 
 # Spaceship Zsh-theme
 SPACESHIP_KUBECONTEXT_SHOW=false
@@ -143,6 +142,10 @@ SPACESHIP_PACKAGE_SHOW=false
 SPACESHIP_DOCKER_SHOW=false
 SPACESHIP_GIT_STATUS_SHOW=false
 
+# Load secrets from a separate file (not in version control)
+[ -f ~/.secrets ] && source ~/.secrets
+
+export PATH=$HOME/.local/bin:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -156,3 +159,19 @@ if [ -f '/Users/arianbessonart/software/google-cloud-sdk/completion.zsh.inc' ]; 
 export PATH="$PATH:$HOME/.rvm/bin"
 
 export PUBLIC_IP=`dig +short @resolver1.opendns.com myip.opendns.com`
+
+eval "$(direnv hook zsh)"
+
+function cursor {
+  open -a "/Applications/Cursor.app" "$@"
+}
+
+. "$HOME/.local/bin/env"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+export PATH="$HOME/.local/bin:$PATH"
+
+# Added by Antigravity
+export PATH="/Users/arianbessonart/.antigravity/antigravity/bin:$PATH"

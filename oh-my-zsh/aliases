@@ -44,8 +44,8 @@ alias kt="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-pro
 
 ## List all files colorized in long format
 #
-alias ls="exa"
-alias l="exa -l --git"
+alias ls="eza"
+alias l="eza -l --git"
 # alias l='ls -lat ${colorflag}'
 
 ## Show/hide hidden files in Finder
@@ -70,5 +70,7 @@ alias n=nvim
 
 ## terraform
 alias tf=terraform
+
+alias c=cursor
 
 ## END

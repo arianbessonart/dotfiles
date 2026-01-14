@@ -26,6 +26,7 @@ brew update
 
 apps=(
   coreutils
+  exa
   fzf
   neovim
   rg
@@ -33,7 +34,6 @@ apps=(
   go
   node
   yarn
-  rbenv
 )
 
 for app in "${apps[@]}"

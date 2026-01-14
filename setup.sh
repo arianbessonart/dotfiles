@@ -3,6 +3,9 @@
 # Exit immediately if a command exits with a non-zero status.
 set -e
 
+# Get the directory where this script is located and cd into it
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$SCRIPT_DIR"
 
 # Installation
 # 1. homebrew/install.sh
@@ -20,18 +23,31 @@ if [ $uname == "Darwin" ]; then
 fi
 
 if [ $platform == "macos" ]; then
-  echo "./homebrew/install.sh"
-  # ./setup-mac
+  echo "Installing Homebrew and apps..."
+  homebrew/install.sh
 fi
 
-homebrew/install.sh
+echo "Setting up Git..."
 git/setup.sh
+
+echo "Setting up Shell (Oh My Zsh)..."
 shell/setup.sh
+
+echo "Setting up Node..."
 node/setup.sh
+
+echo "Setting up Rust..."
 rust/setup.sh
+
+echo "Setting up Vim/Neovim..."
 vim/setup.sh
+
+echo "Setting up tmux..."
 tmux/setup.sh
 
 if [ $platform == "macos" ]; then
-  echo "./setup-mac"
+  echo "Mac-specific setup complete. You may want to run mac/setup.sh for additional macOS preferences."
 fi
+
+echo ""
+echo "Setup complete! Please restart your terminal or run 'source ~/.zshrc' to apply changes."

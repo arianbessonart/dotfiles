@@ -7,15 +7,15 @@ source utility
 
 
 apps=(
-  "--HEAD universal-ctags/universal-ctags/universal-ctags"
-  docker
-  docker-machine
   git
   htop
   jq
   plantuml
   telnet
   tree
+  the_silver_searcher
+  tmux
+  tailscale
   watch
   wget
 )
@@ -31,31 +31,33 @@ do
 done
 
 appsCask=(
-  "caffeine"
-  "iterm2"
-  "the-unarchiver"
-  "the_silver_searcher"
-  "visual-studio-code"
-  "google-chrome"
+  "ghostty"
+  "brave"
+  "cursor"
+  "chatgpt"
+  "docker-desktop"
+  "claude-code"
+  "google-cloud-sdk"
   "itsycal"
+  "meetingbar"
+  "mongodb-compass"
+  "notion"
+  "notion-calendar"
   "postman"
-  "postgresql"
-  "lastpass"
-  "skitch"
+  "stremio"
   "slack"
   "rectangle"
   "spotify"
   "vlc"
-  "virtualbox"
   "whatsapp"
 )
 
 for appCask in "${appsCask[@]}"
 do
-  if ! brew cask info "$appCask" > /dev/null; then
+  if ! brew info --cask "$appCask" > /dev/null; then
     fancy_echo "$appCask installed"
   else
     echo "$appCask is not installed"
-    brew cask install "$appCask"
+    brew install --cask "$appCask"
   fi
 done

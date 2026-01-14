@@ -20,7 +20,6 @@ Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'jparise/vim-graphql'
 Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
-Plug 'wakatime/vim-wakatime'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-fugitive'
 Plug 'lukas-reineke/indent-blankline.nvim'
@@ -216,36 +215,36 @@ highlight CursorLine guibg=#404040 ctermbg=234
 
 
 "NERDTREE
-map <C-n> :call MyNerdToggle()<CR>
-" Start NERDTree automatically when vim starts up if no files were specified.
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" Close vim if the only window left open is a NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" Sync tree
-"autocmd BufWinEnter * NERDTreeFind
+" map <C-n> :call MyNerdToggle()<CR>
+" " Start NERDTree automatically when vim starts up if no files were specified.
+" " autocmd StdinReadPre * let s:std_in=1
+" " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" " Close vim if the only window left open is a NERDTree
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" " Sync tree
+" "autocmd BufWinEnter * NERDTreeFind
 
-let NERDTreeQuitOnOpen = 0
-let NERDTreeIgnore=['\~$', '\.git$', '.DS_Store']
-let NERDTreeShowHidden=1
-let NERDTreeDirArrows = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeAutoDeleteBuffer = 1
-" Re Map keys
-let NERDTreeMapPreview='p'
+" let NERDTreeQuitOnOpen = 0
+" let NERDTreeIgnore=['\~$', '\.git$', '.DS_Store']
+" let NERDTreeShowHidden=1
+" let NERDTreeDirArrows = 1
+" let NERDTreeMinimalUI = 1
+" let NERDTreeAutoDeleteBuffer = 1
+" " Re Map keys
+" let NERDTreeMapPreview='p'
 
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
- exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
- exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-endfunction
+" " function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+" "  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+" "  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+" " endfunction
 
-function MyNerdToggle()
-  if &filetype == 'nerdtree' || exists("g:NERDTree") && g:NERDTree.IsOpen()
-    :NERDTreeToggle
-  else
-    :NERDTreeFind
-  endif
-endfunction
+" function MyNerdToggle()
+"   if &filetype == 'nerdtree' || exists("g:NERDTree") && g:NERDTree.IsOpen()
+"     :NERDTreeToggle
+"   else
+"     :NERDTreeFind
+"   endif
+" endfunction
 """"""""
 
 "FZF

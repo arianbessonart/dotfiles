@@ -12,10 +12,12 @@ install_dotfile "gitignore"
 git config --global alias.br branch
 git config --global alias.ci commit
 git config --global alias.cim "commit -m"
+git config --global alias.cia "commit --amend"
 git config --global alias.co checkout
 git config --global alias.sw switch
 git config --global alias.gc "git checkout"
-git config --global alias.gp "git push"
+git config --global alias.gp "git push origin -u HEAD"
+git config --global alias.fp '!git push -f origin $(git symbolic-ref --short HEAD)'
 git config --global alias.gl "git pull"
 git config --global alias.lol "log --graph --decorate --pretty=oneline --abbrev-commit"
 git config --global alias.lola "log --graph --decorate --pretty=oneline --abbrev-commit --all"
@@ -33,6 +35,8 @@ git config --global credential.helper osxkeychain
 
 # default push to current branch
 git config --global push.default current
+
+git config --global rebase.autoStash true
 
 # read -p "Email: " email
 # [ -z "${email}" ] && email='arianbessonart@gmail.com'
