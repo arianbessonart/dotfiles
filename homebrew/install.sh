@@ -28,6 +28,7 @@ brew update
 
 apps=(
   coreutils
+  direnv
   eza
   fzf
   neovim

@@ -13,8 +13,9 @@ cd "$SCRIPT_DIR"
 # 3. git/setup.sh
 # 4. node/setup.sh
 # 5. rust/setup.sh
-# 6. vim/setup.sh
+# 6. nvim/setup.sh
 # 7. tmux/setup.sh
+# 8. sdkman/setup.sh
 
 uname=`uname`
 platform="unknown"
@@ -39,11 +40,17 @@ node/setup.sh
 echo "Setting up Rust..."
 rust/setup.sh
 
-echo "Setting up Vim/Neovim..."
-vim/setup.sh
+echo "Setting up Neovim (LazyVim)..."
+nvim/setup.sh
 
 echo "Setting up tmux..."
 tmux/setup.sh
+
+echo "Setting up SDKMAN..."
+sdkman/setup.sh
+
+echo "Setting up IdeaVim..."
+ideavim/setup.sh
 
 if [ $platform == "macos" ]; then
   echo "Mac-specific setup complete. You may want to run mac/setup.sh for additional macOS preferences."

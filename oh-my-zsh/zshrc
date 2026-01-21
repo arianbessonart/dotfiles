@@ -99,6 +99,8 @@ export PATH=$PATH:$HOME/Library/Python/2.7/bin
 ## Rust
 export PATH="$HOME/.cargo/bin:$PATH"
 
+## GitHub (token loaded from ~/.secrets)
+
 ## kubernetes
 mkdir -p "$HOME/.kube"
 KUBECONFIG="$HOME/.kube/config"
@@ -113,7 +115,7 @@ export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 ##### NVM AUTO USE #####
 
-export NVM_DIR="${XDG_CONFIG_HOME:-$HOME/.nvm}"
+export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
@@ -137,7 +139,7 @@ nvm_auto_use
 ##### NVM AUTO USE #####
 
 # Spaceship Zsh-theme
-SPACESHIP_KUBECONTEXT_SHOW=false
+SPACESHIP_KUBECTL_CONTEXT_SHOW=false
 SPACESHIP_PACKAGE_SHOW=false
 SPACESHIP_DOCKER_SHOW=false
 SPACESHIP_GIT_STATUS_SHOW=false
@@ -166,7 +168,11 @@ function cursor {
   open -a "/Applications/Cursor.app" "$@"
 }
 
-. "$HOME/.local/bin/env"
+function idea {
+  open -a "/Applications/IntelliJ IDEA.app" "$@"
+}
+
+# . "$HOME/.local/bin/env"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
